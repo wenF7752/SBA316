@@ -46,7 +46,7 @@ const gameView = {
     },
 
     updateCountdown(counter) {
-        this.countdownElement.innerText = counter;
+        this.countdownElement.style.setProperty('--value', counter); // Update the CSS custom property
     },
 
     showPlayerChoice(playerChoice) {
@@ -169,11 +169,10 @@ const gameController = {
             gameView.showResultMessage('Game over!');
             this.resetGame();
         } else {
-            setTimeout(() => {
-                if (gameView.confirmNextRound()) {
-                    this.nextRound();
-                }
-            }, 1000);
+
+            if (gameView.confirmNextRound())
+                this.nextRound();
+
         }
     },
 
