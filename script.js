@@ -105,6 +105,9 @@ const gameController = {
     },
 
     startShuffle() {
+        if (this.shuffleInterval) {
+            clearInterval(this.shuffleInterval);
+        }
         let currentIndex = 0;
 
         this.shuffleInterval = setInterval(() => {
@@ -118,8 +121,12 @@ const gameController = {
     stopShuffle() {
         clearInterval(this.shuffleInterval);
     },
+    stopCountdown() {
+        clearInterval(this.countdownInterval);
+    },
 
     startCountdown() {
+        this.stopCountdown();
         gameModel.counter = 20;
 
         this.countdownInterval = setInterval(() => {
