@@ -21,7 +21,7 @@
   </head>
   <body class="roboto-regular">
     <div class="container">
-      <main>
+      <main class="w-screen">
         <div
           class="hero min-h-screen w-screen roboto-black"
           style="background-image: url(./images/Hero.webp)"
@@ -34,19 +34,52 @@
                 Welcome to the Rock, Paper, Scissors game. Click the button
                 below to get started.
               </p>
-              <button class="btn btn-primary">Get Started</button>
+              <button class="btn btn-primary" id="heroBtn">Get Started</button>
             </div>
           </div>
         </div>
-        <div class="flex w-full justify-center">
-          <div class="flex w-full justify-center">
-            <img class="w-full h-24" src="./images/rock.png" />
+        <div
+          class="min-h-screen flex flex-col game-container game pt-6"
+          style="display: none"
+        >
+          <div class="computer-player grow flex justify-center">
+            <div class="carousel carousel-vertical rounded-box h-96">
+              <div class="carousel-item h-full">
+                <img src="./images/rock.png" />
+              </div>
+              <div class="carousel-item h-full">
+                <img src="./images/paper.png" />
+              </div>
+              <div class="carousel-item h-full">
+                <img src="./images/scissor.png" />
+              </div>
+            </div>
           </div>
-          <div class="flex w-full justify-center">
-            <img class="w-full h-24" src="./images/paper.png" />
-          </div>
-          <div class="flex w-full justify-center">
-            <img class="w-full h-24" src="./images/scissor.png" />
+          <div class="middle-display grow"></div>
+          <div class="player-display grow">
+            <div class="flex justify-center grow">
+              <div class="flex w-full justify-center">
+                <img
+                  id="rock"
+                  class="w-28 h-28 rpc__hoover"
+                  src="./images/rock.png"
+                />
+              </div>
+              <div class="flex w-full justify-center">
+                <img
+                  id="paper"
+                  class="w-28 h-28 rpc__hoover"
+                  src="./images/paper.png"
+                />
+              </div>
+              <div class="flex w-full justify-center">
+                <img
+                  id="scissors"
+                  class="w-28 h-28 rpc__hoover"
+                  src="./images/scissor.png"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </main>

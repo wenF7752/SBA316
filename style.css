@@ -52,9 +52,9 @@
 html,
 body,
 main {
-  background: #fff;
   width: 100%;
   color: #000;
+  background-image: url(./images/bg.jpeg);
 }
 .hero,
 .container {
@@ -162,4 +162,12 @@ td {
 img {
   border: none;
   max-width: 100%;
+}
+
+.rpc__hoover {
+  transition: all 0.2s ease-in-out;
+}
+.rpc__hoover:hover {
+  transform: scale(1.5);
+  cursor: pointer;
 }
