@@ -9,6 +9,7 @@
   --success: #96e143;
   --warning: #f55400;
   --error: #ff8895;
+  
 }
 .roboto-thin {
   font-family: "Roboto", sans-serif;
@@ -171,3 +172,4 @@ img {
   transform: scale(1.5);
   cursor: pointer;
 }
+

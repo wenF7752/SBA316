@@ -43,42 +43,61 @@
           style="display: none"
         >
           <div class="computer-player grow flex justify-center">
-            <div class="carousel carousel-vertical rounded-box h-96">
-              <div class="carousel-item h-full">
-                <img src="./images/rock.png" />
-              </div>
-              <div class="carousel-item h-full">
-                <img src="./images/paper.png" />
-              </div>
-              <div class="carousel-item h-full">
-                <img src="./images/scissor.png" />
-              </div>
+            <div class="health-bar roboto-black">
+              <h1>Health:</h1>
+              <progress
+                class="progress progress-error w-56 h-12"
+                value="100"
+                max="100"
+              ></progress>
             </div>
           </div>
+          <div id="computerChoice" class="flex justify-center">
+            <img class="size-2/5" src="./images/rock.png" />
+            <img class="size-2/5" src="./images/paper.png" />
+            <img class="size-2/5" src="./images/scissor.png" />
+          </div>
+
           <div class="middle-display grow"></div>
-          <div class="player-display grow">
-            <div class="flex justify-center grow">
-              <div class="flex w-full justify-center">
+          <div
+            class="player-display grow flex flex-col justify-center items-center"
+          >
+            <h1>Time left:</h1>
+            <span class="countdown font-mono text-6xl">
+              <span style="--value:${counter};"></span>
+            </span>
+            <div
+              class="rpc-choose w-screen flex flex-row justify-center space-x-25"
+            >
+              <div class="p-10">
                 <img
                   id="rock"
                   class="w-28 h-28 rpc__hoover"
                   src="./images/rock.png"
                 />
               </div>
-              <div class="flex w-full justify-center">
+              <div class="p-10">
                 <img
                   id="paper"
                   class="w-28 h-28 rpc__hoover"
                   src="./images/paper.png"
                 />
               </div>
-              <div class="flex w-full justify-center">
+              <div class="p-10">
                 <img
                   id="scissors"
                   class="w-28 h-28 rpc__hoover"
                   src="./images/scissor.png"
                 />
               </div>
+            </div>
+            <div class="health-bar pb-24 roboto-black">
+              <h1>Health:</h1>
+              <progress
+                class="progress progress-error w-56 h-12 mb-3"
+                value="100"
+                max="100"
+              ></progress>
             </div>
           </div>
         </div>
