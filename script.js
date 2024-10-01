@@ -55,6 +55,10 @@ const gameView = {
         });
     },
 
+    hideAllPlayerChoices() {
+        this.playerChoiceImages.forEach(img => img.classList.add('hidden'));
+    },
+
     showComputerChoice(computerChoice) {
         this.computerChoiceImages.forEach(img => {
             img.classList.toggle('hidden', img.alt !== computerChoice);
@@ -70,9 +74,7 @@ const gameView = {
         alert(message);
     },
 
-    confirmNextRound() {
-        return confirm('Are you ready for the next round?');
-    }
+
 };
 
 
@@ -138,12 +140,12 @@ const gameController = {
         gameView.showResultMessage('You ran out of time! You lost this round.');
 
         if (gameModel.isGameOver()) {
-            gameView.showResultMessage('Game over!');
+            gameView.showResultMessage('Game over! Click OK to restart the game.');
             this.resetGame();
         } else {
-            if (gameView.confirmNextRound()) {
-                this.nextRound();
-            }
+
+            this.nextRound();
+
         }
     },
 
@@ -156,24 +158,24 @@ const gameController = {
         gameView.showPlayerChoice(playerChoice);
         gameView.showComputerChoice(computerChoice);
 
-        const winner = gameModel.determineWinner(playerChoice, computerChoice);
-        if (winner === 'player') {
-            gameView.showResultMessage('You won this round!');
-        } else if (winner === 'computer') {
-            gameView.showResultMessage('You lost this round!');
-        } else {
-            gameView.showResultMessage('It\'s a draw!');
-        }
+        setTimeout(() => {
+            const winner = gameModel.determineWinner(playerChoice, computerChoice);
+            gameView.updateHealth();
 
-        if (gameModel.isGameOver()) {
-            gameView.showResultMessage('Game over!');
-            this.resetGame();
-        } else {
+            if (winner === 'draw') {
+                gameView.showResultMessage('It\'s a draw!');
+            } else {
+                const message = winner === 'player' ? 'You won!' : 'You lost!';
+                gameView.showResultMessage(message);
+            }
 
-            if (gameView.confirmNextRound())
+            if (gameModel.isGameOver()) {
+                gameView.showResultMessage('Game over! Click OK to restart the game.');
+                this.resetGame();
+            } else {
                 this.nextRound();
-
-        }
+            }
+        }, 1000);
     },
 
     getComputerChoice() {
@@ -185,15 +187,22 @@ const gameController = {
     resetGame() {
         gameModel.resetGame();
         gameView.resetUI();
-        this.startShuffle();
-        this.startCountdown();
+        gameView.hideAllPlayerChoices();
+        setTimeout(() => {
+            this.startShuffle();
+            this.startCountdown();
+        }, 2000);
+
     },
 
     nextRound() {
         gameModel.counter = 20;
         gameView.updateCountdown(gameModel.counter);
-        this.startShuffle();
         this.startCountdown();
+        setTimeout(() => {
+            gameView.hideAllPlayerChoices();
+            this.startShuffle();
+        }, 1000);
     }
 };
 
