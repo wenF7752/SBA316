@@ -133,7 +133,10 @@ const gameController = {
             gameView.updateCountdown(gameModel.counter);
 
             if (gameModel.counter === 0) {
-                this.handleTimeOut();
+                setTimeout(() => {
+                    this.handleTimeOut();
+                }, 1000);
+
                 clearInterval(this.countdownInterval);
             }
 
@@ -144,6 +147,7 @@ const gameController = {
     handleTimeOut() {
         gameModel.playerHealth -= 20;
         gameView.updateHealth();
+
         gameView.showResultMessage('You ran out of time! You lost this round.');
 
         if (gameModel.isGameOver()) {

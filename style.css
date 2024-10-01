@@ -9,7 +9,6 @@
   --success: #96e143;
   --warning: #f55400;
   --error: #ff8895;
-  
 }
 .roboto-thin {
   font-family: "Roboto", sans-serif;
@@ -155,10 +154,6 @@ textarea {
 table {
   border-collapse: collapse;
 }
-td {
-  padding: 0.5rem;
-}
-/* causes tables to actually look like tables */
 
 img {
   border: none;
@@ -173,3 +168,8 @@ img {
   cursor: pointer;
 }
 
+#computerChoice > img,
+#playerChoice > img {
+  width: 200px;
+  height: 200px;
+}
