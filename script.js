@@ -1,4 +1,5 @@
 const gameModel = {
+    playerName: '',
     playerHealth: 100,
     enemyHealth: 100,
     counter: 20,
@@ -40,6 +41,15 @@ const gameView = {
     playerChoiceImages: document.querySelectorAll('#playerChoice img'),
     computerChoiceImages: document.querySelectorAll('#computerChoice img'),
 
+    updatePlayerName() {
+        const name = gameModel.playerName; gameModel
+        const playerNameElements = document.querySelector('.playerHealthSection');
+        const playerNameHeading = document.createElement('h2');
+
+        playerNameHeading.textContent = name;
+
+        playerNameElements.prepend(playerNameHeading);
+    },
     updateHealth() {
         this.playerHealthBar.value = gameModel.playerHealth;
         this.computerHealthBar.value = gameModel.enemyHealth;
@@ -80,6 +90,37 @@ const gameView = {
     showResultMessage(message) {
         alert(message);
     },
+    showInvalidNameMessage() {
+
+        // Select the existing alert if any
+        const existingAlert = document.querySelector('.alert');
+
+        // Remove the existing alert if it exists
+        if (existingAlert) {
+            existingAlert.remove();
+        }
+        // Create the alert div
+        const alertElement = document.createElement('div');
+        alertElement.setAttribute('role', 'alert');
+        alertElement.className = 'alert alert-warning';
+        alertElement.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>Please enter a valid name!</span>
+        `;
+
+        // Select the input field in the .hero section
+        const heroInput = document.querySelector('.hero input');
+
+        // Insert the alert element right after the input field
+        heroInput.insertAdjacentElement('afterend', alertElement);
+
+        // Automatically remove the alert after 3 seconds
+        setTimeout(() => {
+            alertElement.remove();
+        }, 3000);
+    }
 
 
 };
@@ -95,11 +136,32 @@ const gameController = {
 
     bindEvents() {
         const hero_btn = document.getElementById('heroBtn');
-        hero_btn.addEventListener('click', this.startGame.bind(this));
+        hero_btn.addEventListener('click', event => {
+            const playerName = document.querySelector('.hero input').value;
+            gameModel.playerName = playerName;
+            if (playerName.length > 0) {
+                this.startGame();
+            }
+        });
 
         const playerChoices = document.querySelectorAll('.rpc-choose img');
         playerChoices.forEach(choice => {
             choice.addEventListener('click', this.handlePlayerChoice.bind(this));
+        });
+
+        const playerName = document.querySelector('.hero input');
+        playerName.addEventListener('input', event => {
+            if (this.playerNameValidation()) {
+                if (event.target.value.length > 0) {
+                    hero_btn.classList.remove('btn-disabled');
+                } else {
+                    hero_btn.classList.add('btn-disabled');
+                }
+            } else {
+                hero_btn.classList.add('btn-disabled');
+                gameView.showInvalidNameMessage();
+            }
+
         });
     },
 
@@ -109,8 +171,21 @@ const gameController = {
 
         this.startShuffle();
         this.startCountdown();
+        gameView.updatePlayerName();
+        console.log(gameModel.playerName);
     },
 
+    playerNameValidation() {
+        const playerName = document.querySelector('.hero input').value;
+        const namePattern = /^[a-zA-Z]+$/;
+
+        // Test the playerName against the pattern
+        if (namePattern.test(playerName)) {
+            return true;
+        } else {
+            return false; // Name is invalid (contains non-alphabetic characters)
+        }
+    },
     startShuffle() {
         if (this.shuffleInterval) {
             clearInterval(this.shuffleInterval);
@@ -226,3 +301,6 @@ const gameController = {
 
 // Initialize the game controller
 gameController.init();
+
+
+

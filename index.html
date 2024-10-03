@@ -27,14 +27,24 @@
           style="background-image: url(./images/Hero.webp)"
         >
           <div class="hero-overlay bg-opacity-50"></div>
+
           <div class="hero-content text-neutral-content text-center">
-            <div class="max-w-md text-gray-50">
+            <div class="max-w-md text-gray-50 flex flex-col gap-4">
               <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
               <p class="mb-5">
                 Welcome to the Rock, Paper, Scissors game. Click the button
                 below to get started.
               </p>
-              <button class="btn btn-primary" id="heroBtn">Get Started</button>
+              <input
+                type="text"
+                placeholder="Enter your name to get started"
+                style="text-align: center"
+                class="input input-bordered"
+              />
+
+              <button class="btn btn-primary btn-disabled" id="heroBtn">
+                Get Started
+              </button>
             </div>
           </div>
         </div>
@@ -115,7 +125,7 @@
                 />
               </div>
             </div>
-            <div class="health-bar roboto-black">
+            <div class="health-bar roboto-black playerHealthSection">
               <h1>Health:</h1>
               <progress
                 class="progress progress-error w-56 h-12"
