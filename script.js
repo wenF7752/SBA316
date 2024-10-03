@@ -56,7 +56,14 @@ const gameView = {
     },
 
     hideAllPlayerChoices() {
-        this.playerChoiceImages.forEach(img => img.classList.add('hidden'));
+        // Start with the first child of the playerChoiceImages container
+        let currentImage = this.playerChoiceImages[0].parentNode.firstElementChild;
+
+        // Loop through all sibling elements
+        while (currentImage) {
+            currentImage.classList.add('hidden');
+            currentImage = currentImage.nextElementSibling; // Move to the next sibling
+        }
     },
 
     showComputerChoice(computerChoice) {
